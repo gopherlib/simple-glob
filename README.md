@@ -59,31 +59,19 @@ goos: darwin
 goarch: arm64
 pkg: github.com/gopherlib/simple-glob
 
-BenchmarkParseGlobGoogleURL
-BenchmarkParseGlobGoogleURL-8         	  908487	      1281 ns/op
-BenchmarkParseGlobAbc
-BenchmarkParseGlobAbc-8               	 2062412	       582.0 ns/op
-BenchmarkParseGlobDef
-BenchmarkParseGlobDef-8               	 2255916	       532.2 ns/op
-BenchmarkParseGlobAbdef
-BenchmarkParseGlobAbdef-8             	13398868	        91.54 ns/op
+BenchmarkParseGlobGoogleURL-8             904128              1278 ns/op            1400 B/op         39 allocs/op
+BenchmarkParseGlobAbc-8                  2074610               580.4 ns/op           744 B/op         20 allocs/op
+BenchmarkParseGlobDef-8                  2280055               528.0 ns/op           712 B/op         18 allocs/op
+BenchmarkParseGlobAbdef-8               13565740                94.31 ns/op          256 B/op          3 allocs/op
 
-BenchmarkGlobMatchGoogleURL_True
-BenchmarkGlobMatchGoogleURL_True-8    	39037932	        30.07 ns/op
-BenchmarkGlobMatchGoogleURL_False
-BenchmarkGlobMatchGoogleURL_False-8   	80282545	        15.46 ns/op
-BenchmarkGlobMatchAbc
-BenchmarkGlobMatchAbc-8               	231060092	         5.215 ns/op
-BenchmarkGlobMatchAbc_False
-BenchmarkGlobMatchAbc_False-8         	351424537	         3.456 ns/op
-BenchmarkGlobMatchDef_True
-BenchmarkGlobMatchDef_True-8          	219895939	         5.467 ns/op
-BenchmarkGlobMatchDef_Flase
-BenchmarkGlobMatchDef_Flase-8         	349861196	         3.484 ns/op
-BenchmarkGlobMatchAbdef_True
-BenchmarkGlobMatchAbdef_True-8        	570146192	         2.117 ns/op
-BenchmarkGlobMatchAbdef_Flase
-BenchmarkGlobMatchAbdef_Flase-8       	569324104	         2.094 ns/op
+BenchmarkGlobMatchGoogleURL_True-8      40695439                29.89 ns/op            0 B/op          0 allocs/op
+BenchmarkGlobMatchGoogleURL_False-8     73579942                15.84 ns/op            0 B/op          0 allocs/op
+BenchmarkGlobMatchAbc-8                 231631929                5.211 ns/op           0 B/op          0 allocs/op
+BenchmarkGlobMatchAbc_False-8           348261666                3.472 ns/op           0 B/op          0 allocs/op
+BenchmarkGlobMatchDef_True-8            219939248                5.459 ns/op           0 B/op          0 allocs/op
+BenchmarkGlobMatchDef_Flase-8           350182290                3.419 ns/op           0 B/op          0 allocs/op
+BenchmarkGlobMatchAbdef_True-8          571836799                2.093 ns/op           0 B/op          0 allocs/op
+BenchmarkGlobMatchAbdef_Flase-8         573770670                2.095 ns/op           0 B/op          0 allocs/op
 ```
 
 ## Syntax
