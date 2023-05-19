@@ -1,6 +1,6 @@
 # simple-glob
 
-> Go Pure Globbing Library.
+> Go Simple Globbing Library.
 > 
 > This repository was forked from https://github.com/gobwas/glob, but with some simplifications.
 
