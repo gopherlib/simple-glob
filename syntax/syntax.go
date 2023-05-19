@@ -1,8 +1,8 @@
 package syntax
 
 import (
-	"github.com/gopher/simple-glob/syntax/ast"
-	"github.com/gopher/simple-glob/syntax/lexer"
+	"github.com/gopherlib/simple-glob/syntax/ast"
+	"github.com/gopherlib/simple-glob/syntax/lexer"
 )
 
 func Parse(s string) (*ast.Node, error) {

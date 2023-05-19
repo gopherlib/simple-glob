@@ -8,7 +8,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"github.com/gopher/simple-glob"
+	"github.com/gopherlib/simple-glob"
 )
 
 func benchString(r testing.BenchmarkResult) string {

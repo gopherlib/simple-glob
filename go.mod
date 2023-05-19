@@ -1,3 +1,3 @@
-module github.com/gopher/simple-glob
+module github.com/gopherlib/simple-glob
 
 go 1.17

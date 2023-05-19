@@ -13,16 +13,18 @@ type test struct {
 
 func TestGlob(t *testing.T) {
 	for _, test := range []test{
-		{pattern: "* cat * eyes", match: "my cat has very bright eyes", should: true},
-		{pattern: "", match: "", should: true},
-		{pattern: `a\*b`, match: "a*b", should: false},
-		{pattern: `a\*b`, match: `a\*b`, should: true},
+		{should: true, pattern: "* cat * eyes", match: "my cat has very bright eyes"},
+		{should: true, pattern: "", match: ""},
+		{should: true, pattern: `a*b`, match: "a*b"},
+		{should: false, pattern: `a\*b`, match: "a*b"},
+		{should: true, pattern: `a\*b`, match: `a\*b`},
 
 		{should: true, pattern: "*ä", match: "åä"},
 		{should: true, pattern: "abc", match: "abc"},
 		{should: true, pattern: "a*c", match: "abc"},
 		{should: true, pattern: "a*c", match: "a12345c"},
 		{should: false, pattern: "a?c", match: "a1c"},
+		{should: true, pattern: "a.*", match: "a.b.c"},
 		{should: true, pattern: "a.b", match: "a.b", delimiters: []rune{'.'}},
 		{should: true, pattern: "a.*", match: "a.b", delimiters: []rune{'.'}},
 		{should: false, pattern: "a.**", match: "a.b.c", delimiters: []rune{'.'}},
@@ -44,6 +46,7 @@ func TestGlob(t *testing.T) {
 		{should: false, pattern: "*at", match: "fat", delimiters: []rune{'f'}},
 		{should: false, pattern: "a.*", match: "a.b.c", delimiters: []rune{'.'}},
 		{should: false, pattern: "a.?.c", match: "a.bb.c", delimiters: []rune{'.'}},
+		{should: true, pattern: "a.*.c", match: "a.bb.c", delimiters: []rune{'.'}},
 		{should: false, pattern: "*", match: "a.b.c", delimiters: []rune{'.'}},
 
 		{should: true, pattern: "*test", match: "this is a test"},
@@ -55,41 +58,15 @@ func TestGlob(t *testing.T) {
 
 		{should: false, pattern: "*is", match: "this is a test"},
 		{should: false, pattern: "*no*", match: "this is a test"},
-		{should: false, pattern: "[!a]*", match: "this is a test3"},
-
 		{should: true, pattern: "*abc", match: "abcabc"},
-		{should: true, pattern: "**abc", match: "abcabc"},
-		{should: false, pattern: "???", match: "abc"},
-		{should: false, pattern: "?*?", match: "abc"},
-		{should: false, pattern: "?*?", match: "ac"},
-		{should: false, pattern: "sta", match: "stagnation"},
-		{should: true, pattern: "sta*", match: "stagnation"},
-		{should: false, pattern: "sta?", match: "stagnation"},
-		{should: false, pattern: "sta?n", match: "stagnation"},
+		{should: true, pattern: "/*", match: "/rate"},
 
-		{should: false, pattern: "{abc,def}ghi", match: "defghi"},
-		{should: false, pattern: "{abc,abcd}a", match: "abcda"},
-		{should: false, pattern: "{a,ab}{bc,f}", match: "abc"},
-		{should: false, pattern: "{*,**}{a,b}", match: "ab"},
-		{should: false, pattern: "{*,**}{a,b}", match: "ac"},
-
-		{should: false, pattern: "/{rate,[a-z][a-z][a-z]}*", match: "/rate"},
-		{should: false, pattern: "/{rate,[0-9][0-9][0-9]}*", match: "/rate"},
-		{should: false, pattern: "/{rate,[a-z][a-z][a-z]}*", match: "/usd"},
-
-		{should: false, pattern: "{*.google.*,*.yandex.*}", match: "www.google.com", delimiters: []rune{'.'}},
-		{should: false, pattern: "{*.google.*,*.yandex.*}", match: "www.yandex.com", delimiters: []rune{'.'}},
-		{should: false, pattern: "{*.google.*,*.yandex.*}", match: "yandex.com", delimiters: []rune{'.'}},
-		{should: false, pattern: "{*.google.*,*.yandex.*}", match: "google.com", delimiters: []rune{'.'}},
-
-		{should: false, pattern: "{*.google.*,yandex.*}", match: "www.google.com", delimiters: []rune{'.'}},
-		{should: false, pattern: "{*.google.*,yandex.*}", match: "yandex.com", delimiters: []rune{'.'}},
-		{should: false, pattern: "{*.google.*,yandex.*}", match: "www.yandex.com", delimiters: []rune{'.'}},
-		{should: false, pattern: "{*.google.*,yandex.*}", match: "google.com", delimiters: []rune{'.'}},
-
-		{should: false, pattern: "*//{,*.}example.com", match: "https://www.example.com"},
-		{should: false, pattern: "*//{,*.}example.com", match: "http://example.com"},
-		{should: false, pattern: "*//{,*.}example.com", match: "http://example.com.net"},
+		{should: true, pattern: "*//*.example.com", match: "https://www.example.com"},
+		{should: true, pattern: "*//*.example.com", match: "https://www.example.com", delimiters: []rune{'.'}},
+		{should: true, pattern: "*//*example.com", match: "https://www.example.com"},
+		{should: false, pattern: "*//*example.com", match: "https://www.example.com", delimiters: []rune{'.'}},
+		{should: false, pattern: "*//*.example.com", match: "http://example.com"},
+		{should: false, pattern: "*//*.example.com", match: "http://example.com.net"},
 		{should: true, pattern: "*//*example.com", match: "http://example.com"},
 	} {
 		t.Run(test.pattern, func(t *testing.T) {

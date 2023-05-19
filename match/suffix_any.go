@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	sutil "github.com/gopher/simple-glob/util/strings"
+	sutil "github.com/gopherlib/simple-glob/util/strings"
 )
 
 type SuffixAny struct {

@@ -7,9 +7,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/gopher/simple-glob"
-	"github.com/gopher/simple-glob/match"
-	"github.com/gopher/simple-glob/match/debug"
+	"github.com/gopherlib/simple-glob"
+	"github.com/gopherlib/simple-glob/match"
+	"github.com/gopherlib/simple-glob/match/debug"
 )
 
 func main() {

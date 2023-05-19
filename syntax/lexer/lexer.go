@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"unicode/utf8"
 
-	"github.com/gopher/simple-glob/util/runes"
+	"github.com/gopherlib/simple-glob/util/runes"
 )
 
 const (

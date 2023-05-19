@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	sutil "github.com/gopher/simple-glob/util/strings"
+	sutil "github.com/gopherlib/simple-glob/util/strings"
 )
 
 type PrefixAny struct {

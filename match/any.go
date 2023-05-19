@@ -3,7 +3,7 @@ package match
 import (
 	"fmt"
 
-	"github.com/gopher/simple-glob/util/strings"
+	"github.com/gopherlib/simple-glob/util/strings"
 )
 
 type Any struct {

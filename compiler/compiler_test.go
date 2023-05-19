@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/gopher/simple-glob/match"
-	"github.com/gopher/simple-glob/match/debug"
-	"github.com/gopher/simple-glob/syntax/ast"
+	"github.com/gopherlib/simple-glob/match"
+	"github.com/gopherlib/simple-glob/match/debug"
+	"github.com/gopherlib/simple-glob/syntax/ast"
 )
 
 var separators = []rune{'.'}

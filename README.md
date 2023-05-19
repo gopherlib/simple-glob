@@ -1,12 +1,13 @@
 # simple-glob
 
 > Go Pure Globbing Library.
+> 
 > This repository was forked from https://github.com/gobwas/glob, but with some simplifications.
 
 ## Install
 
 ```shell
-    go get github.com/gopher/simple-glob
+    go get github.com/gopherlib/simple-glob
 ```
 
 ## Example
@@ -15,7 +16,7 @@
 
 package main
 
-import "github.com/gopher/simple-glob"
+import "github.com/gopherlib/simple-glob"
 
 func main() {
 	var g glob.Glob
@@ -37,7 +38,7 @@ func main() {
 This library is created for compile-once patterns. This means, that compilation could take time, but
 strings matching is done faster, than in case when always parsing template.
 
-If you will not use compiled `glob.Glob` object, and do `g := glob.MustCompile(pattern); g.Match(...)` every time, then
+If you do not use compiled `glob.Glob` object, and do `g := glob.MustCompile(pattern); g.Match(...)` every time, then
 your code will be much slower.
 
 Run `go test -bench=.` from source root to see the benchmarks:
@@ -56,7 +57,7 @@ Run `go test -bench=.` from source root to see the benchmarks:
 ```text
 goos: darwin
 goarch: arm64
-pkg: github.com/gopher/simple-glob
+pkg: github.com/gopherlib/simple-glob
 
 BenchmarkParseGlobGoogleURL
 BenchmarkParseGlobGoogleURL-8         	  908487	      1281 ns/op

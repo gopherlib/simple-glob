@@ -1,8 +1,8 @@
 package glob
 
 import (
-	"github.com/gopher/simple-glob/compiler"
-	"github.com/gopher/simple-glob/syntax"
+	"github.com/gopherlib/simple-glob/compiler"
+	"github.com/gopherlib/simple-glob/syntax"
 )
 
 // Glob represents compiled glob pattern.

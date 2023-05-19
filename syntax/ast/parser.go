@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gopher/simple-glob/syntax/lexer"
+	"github.com/gopherlib/simple-glob/syntax/lexer"
 )
 
 type Lexer interface {

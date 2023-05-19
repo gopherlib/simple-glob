@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/gopher/simple-glob/match"
-	"github.com/gopher/simple-glob/syntax/ast"
-	"github.com/gopher/simple-glob/util/runes"
+	"github.com/gopherlib/simple-glob/match"
+	"github.com/gopherlib/simple-glob/syntax/ast"
+	"github.com/gopherlib/simple-glob/util/runes"
 )
 
 func optimizeMatcher(matcher match.Matcher) match.Matcher {
