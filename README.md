@@ -3,6 +3,7 @@
 > Go Simple Globbing Library.
 > 
 > This repository was forked from https://github.com/gobwas/glob, but with some simplifications.
+> Only `*` is supported as a wildcard to match any string other than a delimiter.
 
 ## Install
 
