@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-const lenOne = 1
 const lenZero = 0
 const lenNo = -1
 
@@ -26,7 +25,7 @@ func (m Matchers) String() string {
 		s = append(s, fmt.Sprint(matcher))
 	}
 
-	return fmt.Sprintf("%s", strings.Join(s, ","))
+	return strings.Join(s, ",")
 }
 
 // appendMerge merges and sorts given already SORTED and UNIQUE segments.

@@ -38,7 +38,7 @@ var (
 	segments4 = []int{4}
 )
 
-var segmentsByRuneLength [5][]int = [5][]int{
+var segmentsByRuneLength = [5][]int{
 	0: segments0,
 	1: segments1,
 	2: segments2,

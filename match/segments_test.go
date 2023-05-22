@@ -18,6 +18,21 @@ func benchPool(i int, b *testing.B) {
 	})
 }
 
+func benchPointerPool(i int, b *testing.B) {
+	pool := sync.Pool{New: func() interface{} {
+		ni := make([]int, 0, i)
+		return &ni
+	}}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			s := pool.Get().(*[]int)
+			*s = (*s)[:0]
+			pool.Put(s)
+		}
+	})
+}
+
 func benchMake(i int, b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
@@ -52,6 +67,34 @@ func BenchmarkSegmentsPool_128(b *testing.B) {
 }
 func BenchmarkSegmentsPool_256(b *testing.B) {
 	benchPool(256, b)
+}
+
+func BenchmarkSegmentsPointerPool_1(b *testing.B) {
+	benchPointerPool(1, b)
+}
+func BenchmarkSegmentsPointerPool_2(b *testing.B) {
+	benchPointerPool(2, b)
+}
+func BenchmarkSegmentsPointerPool_4(b *testing.B) {
+	benchPointerPool(4, b)
+}
+func BenchmarkSegmentsPointerPool_8(b *testing.B) {
+	benchPointerPool(8, b)
+}
+func BenchmarkSegmentsPointerPool_16(b *testing.B) {
+	benchPointerPool(16, b)
+}
+func BenchmarkSegmentsPointerPool_32(b *testing.B) {
+	benchPointerPool(32, b)
+}
+func BenchmarkSegmentsPointerPool_64(b *testing.B) {
+	benchPointerPool(64, b)
+}
+func BenchmarkSegmentsPointerPool_128(b *testing.B) {
+	benchPointerPool(128, b)
+}
+func BenchmarkSegmentsPointerPool_256(b *testing.B) {
+	benchPointerPool(256, b)
 }
 
 func BenchmarkSegmentsMake_1(b *testing.B) {

@@ -28,7 +28,7 @@ func graphvizInternal(m match.Matcher, id string) string {
 			default:
 				sub := fmt.Sprintf("%x", rand.Int63())
 				_, _ = fmt.Fprintf(buf, `"%s"->"%s";`, id, sub)
-				_, _ = fmt.Fprintf(buf, graphvizInternal(n, sub))
+				_, _ = fmt.Fprint(buf, graphvizInternal(n, sub))
 			}
 		}
 	default:

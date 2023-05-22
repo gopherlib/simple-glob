@@ -2,7 +2,6 @@ package compiler
 
 import (
 	"fmt"
-	"reflect"
 
 	"github.com/gopherlib/simple-glob/match"
 	"github.com/gopherlib/simple-glob/syntax/ast"
@@ -220,53 +219,6 @@ func minimizeMatchers(matchers []match.Matcher) []match.Matcher {
 	return minimizeMatchers(next)
 }
 
-// minimizeAnyOf tries to find common children of given node of AnyOf pattern
-// it searches for common children from left and from right
-// if any common children are found – then it returns new optimized ast tree
-// else it returns nil
-func minimizeTreeAnyOf(tree *ast.Node) *ast.Node {
-	if !areOfSameKind(tree.Children, ast.KindPattern) {
-		return nil
-	}
-
-	commonLeft, commonRight := commonChildren(tree.Children)
-	commonLeftCount, commonRightCount := len(commonLeft), len(commonRight)
-	if commonLeftCount == 0 && commonRightCount == 0 { // there are no common parts
-		return nil
-	}
-
-	var result []*ast.Node
-	if commonLeftCount > 0 {
-		result = append(result, ast.NewNode(ast.KindPattern, nil, commonLeft...))
-	}
-
-	var anyOf []*ast.Node
-	for _, child := range tree.Children {
-		reuse := child.Children[commonLeftCount : len(child.Children)-commonRightCount]
-		var node *ast.Node
-		if len(reuse) == 0 {
-			// this pattern is completely reduced by commonLeft and commonRight patterns
-			// so it become nothing
-			node = ast.NewNode(ast.KindNothing, nil)
-		} else {
-			node = ast.NewNode(ast.KindPattern, nil, reuse...)
-		}
-		anyOf = appendIfUnique(anyOf, node)
-	}
-	switch {
-	case len(anyOf) == 1 && anyOf[0].Kind != ast.KindNothing:
-		result = append(result, anyOf[0])
-	case len(anyOf) > 1:
-		result = append(result, ast.NewNode(ast.KindAnyOf, nil, anyOf...))
-	}
-
-	if commonRightCount > 0 {
-		result = append(result, ast.NewNode(ast.KindPattern, nil, commonRight...))
-	}
-
-	return ast.NewNode(ast.KindPattern, nil, result...)
-}
-
 func commonChildren(nodes []*ast.Node) (commonLeft, commonRight []*ast.Node) {
 	if len(nodes) <= 1 {
 		return
@@ -325,24 +277,6 @@ func commonChildren(nodes []*ast.Node) (commonLeft, commonRight []*ast.Node) {
 	commonRight = commonRight[lastRight:]
 
 	return
-}
-
-func appendIfUnique(target []*ast.Node, val *ast.Node) []*ast.Node {
-	for _, n := range target {
-		if reflect.DeepEqual(n, val) {
-			return target
-		}
-	}
-	return append(target, val)
-}
-
-func areOfSameKind(nodes []*ast.Node, kind ast.Kind) bool {
-	for _, n := range nodes {
-		if n.Kind != kind {
-			return false
-		}
-	}
-	return true
 }
 
 func leastChildren(nodes []*ast.Node) int {

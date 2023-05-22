@@ -69,7 +69,7 @@ func main() {
 
 	cb := testing.Benchmark(func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			glob.Compile(*pattern, separators...)
+			_, _ = glob.Compile(*pattern, separators...)
 		}
 	})
 	fmt.Println("compile:", benchString(cb))

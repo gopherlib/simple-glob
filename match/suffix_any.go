@@ -16,28 +16,28 @@ func NewSuffixAny(s string, sep []rune) SuffixAny {
 	return SuffixAny{s, sep}
 }
 
-func (self SuffixAny) Index(s string) (int, []int) {
-	idx := strings.Index(s, self.Suffix)
+func (a SuffixAny) Index(s string) (int, []int) {
+	idx := strings.Index(s, a.Suffix)
 	if idx == -1 {
 		return -1, nil
 	}
 
-	i := sutil.LastIndexAnyRunes(s[:idx], self.Separators) + 1
+	i := sutil.LastIndexAnyRunes(s[:idx], a.Separators) + 1
 
-	return i, []int{idx + len(self.Suffix) - i}
+	return i, []int{idx + len(a.Suffix) - i}
 }
 
-func (self SuffixAny) Len() int {
+func (a SuffixAny) Len() int {
 	return lenNo
 }
 
-func (self SuffixAny) Match(s string) bool {
-	if !strings.HasSuffix(s, self.Suffix) {
+func (a SuffixAny) Match(s string) bool {
+	if !strings.HasSuffix(s, a.Suffix) {
 		return false
 	}
-	return sutil.IndexAnyRunes(s[:len(s)-len(self.Suffix)], self.Separators) == -1
+	return sutil.IndexAnyRunes(s[:len(s)-len(a.Suffix)], a.Separators) == -1
 }
 
-func (self SuffixAny) String() string {
-	return fmt.Sprintf("<suffix_any:![%s]%s>", string(self.Separators), self.Suffix)
+func (a SuffixAny) String() string {
+	return fmt.Sprintf("<suffix_any:![%s]%s>", string(a.Separators), a.Suffix)
 }

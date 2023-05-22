@@ -18,9 +18,9 @@ func NewRow(len int, m ...Matcher) Row {
 	}
 }
 
-func (self Row) matchAll(s string) bool {
+func (r Row) matchAll(s string) bool {
 	var idx int
-	for _, m := range self.Matchers {
+	for _, m := range r.Matchers {
 		length := m.Len()
 
 		var next, i int
@@ -41,37 +41,37 @@ func (self Row) matchAll(s string) bool {
 	return true
 }
 
-func (self Row) lenOk(s string) bool {
+func (r Row) lenOk(s string) bool {
 	var i int
 	for range s {
 		i++
-		if i > self.RunesLength {
+		if i > r.RunesLength {
 			return false
 		}
 	}
-	return self.RunesLength == i
+	return r.RunesLength == i
 }
 
-func (self Row) Match(s string) bool {
-	return self.lenOk(s) && self.matchAll(s)
+func (r Row) Match(s string) bool {
+	return r.lenOk(s) && r.matchAll(s)
 }
 
-func (self Row) Len() (l int) {
-	return self.RunesLength
+func (r Row) Len() (l int) {
+	return r.RunesLength
 }
 
-func (self Row) Index(s string) (int, []int) {
+func (r Row) Index(s string) (int, []int) {
 	for i := range s {
-		if len(s[i:]) < self.RunesLength {
+		if len(s[i:]) < r.RunesLength {
 			break
 		}
-		if self.matchAll(s[i:]) {
-			return i, self.Segments
+		if r.matchAll(s[i:]) {
+			return i, r.Segments
 		}
 	}
 	return -1, nil
 }
 
-func (self Row) String() string {
-	return fmt.Sprintf("<row_%d:[%s]>", self.RunesLength, self.Matchers)
+func (r Row) String() string {
+	return fmt.Sprintf("<row_%d:[%s]>", r.RunesLength, r.Matchers)
 }
