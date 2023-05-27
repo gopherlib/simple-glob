@@ -30,6 +30,11 @@ func main() {
 	g = glob.MustCompile("api.*.com", '.')
 	g.Match("api.github.com") // true
 	g.Match("api.gi.hub.com") // false
+	
+	// create new glob without set of delimiters as ["."]
+	g = glob.MustCompile("api.*.com")
+	g.Match("api.github.com") // true
+	g.Match("api.gi.hub.com") // true
 }
 
 ```
